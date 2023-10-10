@@ -225,8 +225,11 @@ class Charset
             $result = self::$aliases[$str];
         }
         // UTF
-        else if (preg_match('/U[A-Z]{2}-?(7|8|16|32)(BE|LE)*/', $str, $m)) {
-            $result = 'UTF-' . $m[1] . @$m[2];
+        else if (preg_match('/UTF-?(7|8|16|32)(BE|LE)**/', $str, $m)) {
+            $result = 'UTF-' . $m[1];
+            if (isset($m[2])) {
+                $result .= $m[2];
+            }
         }
         // ISO-8859
         else if (preg_match('/ISO8859([0-9]{0,2})/', $str, $m)) {
