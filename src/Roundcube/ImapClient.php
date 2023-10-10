@@ -2494,7 +2494,16 @@ class ImapClient
                 $ln      = 0;
 
                 // Tokenize response and assign to object properties
-                while (@list($name, $value) = $this->tokenizeResponse($line, 2)) {
+                while (true) {
+
+                    $ret = $this->tokenizeResponse($line, 2);
+
+                    if (empty($ret)) {
+                        break;
+                    }
+
+                    [$name, $value] = $ret;
+
                     if ($name == 'UID') {
                         $result[$id]->uid = intval($value);
                     }
