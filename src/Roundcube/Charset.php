@@ -225,7 +225,7 @@ class Charset
             $result = self::$aliases[$str];
         }
         // UTF
-        else if (preg_match('/UTF-?(7|8|16|32)(BE|LE)**/', $str, $m)) {
+        else if (preg_match('/UTF-?(7|8|16|32)(BE|LE)*/', $str, $m)) {
             $result = 'UTF-' . $m[1];
             if (isset($m[2])) {
                 $result .= $m[2];
